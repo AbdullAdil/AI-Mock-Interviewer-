@@ -1,5 +1,9 @@
 # AI Mock Interviewer
 
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
+![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
+![Status](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+
 A web app that generates tailored interview questions from a job description and gives structured AI feedback on your answers. Built with React, Node.js, and the Claude API.
 
 > Work in progress — the polished README (with screenshots, architecture diagram, and demo link) will land once the features are complete.
