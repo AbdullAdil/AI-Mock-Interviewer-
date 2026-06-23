@@ -17,24 +17,27 @@ A web app that generates tailored interview questions from a job description and
 
 You'll need Node.js 20+ installed and an Anthropic API key from <https://console.anthropic.com/>.
 
-### 1. Backend
+### One-time setup
 
 ```bash
-cd server
-cp .env.example .env       # then paste your ANTHROPIC_API_KEY into .env
-npm install
-npm run dev                # starts on http://localhost:3001
+git clone https://github.com/AbdullAdil/AI-Mock-Interviewer-.git
+cd AI-Mock-Interviewer-
+
+# Add your API key
+cp server/.env.example server/.env
+# Then edit server/.env and paste your ANTHROPIC_API_KEY
+
+# Install all dependencies (root, client, server)
+npm run install:all
 ```
 
-### 2. Frontend (in a separate terminal)
+### Run it
 
 ```bash
-cd client
-npm install
-npm run dev                # opens http://localhost:5173
+npm run dev
 ```
 
-The Vite dev server proxies `/api/*` to the backend, so no extra config is needed for local development.
+That starts both the backend (http://localhost:3001) and the frontend (http://localhost:5173) in one terminal, with prefixed log output so you can tell which is which. The Vite dev server proxies `/api/*` to the backend, so no extra config is needed.
 
 ## Project layout
 
