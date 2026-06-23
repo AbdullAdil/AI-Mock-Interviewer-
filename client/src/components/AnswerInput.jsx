@@ -1,3 +1,5 @@
+import Spinner from './Spinner'
+
 // Controlled textarea for the candidate's answer, plus a submit button.
 // Parent owns the value so it can reset between questions.
 export default function AnswerInput({ value, onChange, onSubmit, loading }) {
@@ -13,8 +15,9 @@ export default function AnswerInput({ value, onChange, onSubmit, loading }) {
       <button
         onClick={onSubmit}
         disabled={loading || !value.trim()}
-        className="rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
       >
+        {loading && <Spinner />}
         {loading ? 'Getting feedback…' : 'Submit answer'}
       </button>
     </div>

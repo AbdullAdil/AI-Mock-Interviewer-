@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { generateQuestions } from '@/api/client'
+import Spinner from './Spinner'
 
 // Screen 1: the user pastes a job description and clicks Start.
 // On submit we call the backend, then hand the JD + generated questions
@@ -45,8 +46,9 @@ export default function JobDescriptionForm({ onStart }) {
       <button
         type="submit"
         disabled={loading || !jobDescription.trim()}
-        className="rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
       >
+        {loading && <Spinner />}
         {loading ? 'Generating questions…' : 'Start interview'}
       </button>
     </form>
