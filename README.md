@@ -1,12 +1,33 @@
 # AI Mock Interviewer
 
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge)](https://ai-mock-interviewer-one-theta.vercel.app)
+
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Node](https://img.shields.io/badge/node-%3E%3D20-brightgreen)
-![Status](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+![Status](https://img.shields.io/badge/status-deployed-success)
 
 A web app that generates tailored interview questions from a job description and gives structured AI feedback on your answers. Built with React, Node.js, and the Claude API.
 
-> Work in progress — the polished README (with screenshots, architecture diagram, and demo link) will land once the features are complete.
+**🌐 Try it now:** <https://ai-mock-interviewer-one-theta.vercel.app>
+
+## How it works
+
+1. Paste a job description
+2. The app generates 5 tailored interview questions (mix of behavioural and technical)
+3. Type your answer to each question
+4. Claude gives you structured feedback — what was good, what was missing, and a stronger sample answer
+
+## Architecture
+
+```
+┌─────────────────┐      ┌─────────────────┐      ┌─────────────────┐
+│  React (Vite)   │ ───▶ │  Node + Express │ ───▶ │  Claude API     │
+│  on Vercel      │      │  on Railway     │      │  (Anthropic)    │
+└─────────────────┘      └─────────────────┘      └─────────────────┘
+   user's browser           your backend            Anthropic's cloud
+```
+
+The backend holds the API key and prompts Claude on the frontend's behalf — keeping secrets server-side and making the prompts easy to iterate without redeploying the UI.
 
 ## Stack
 - **Frontend:** React (Vite) + Tailwind + shadcn/ui — deployed to Vercel
