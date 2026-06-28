@@ -2,14 +2,21 @@ import { useState } from 'react'
 import QuestionCard from './QuestionCard'
 import AnswerInput from './AnswerInput'
 import FeedbackPanel from './FeedbackPanel'
+import InterviewRecap from './InterviewRecap'
 import { getFeedback } from '@/api/client'
 
-// Screen 2: orchestrates the question → answer → feedback → next-question loop.
-// Holds the index of the current question and the feedback for the answer in flight.
+// Screen 2: orchestrates the question → answer → feedback → next-question loop,
+// then renders the full recap when all questions are done.
+//
+// Holds:
+//   - currentIndex: which question we're on
+//   - answer / feedback: state for the question in flight
+//   - history: accumulated [{ question, answer, feedback }] for the recap screen
 export default function InterviewSession({ jobDescription, questions, onRestart }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [answer, setAnswer] = useState('')
   const [feedback, setFeedback] = useState(null)
+  const [history, setHistory] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -34,30 +41,19 @@ export default function InterviewSession({ jobDescription, questions, onRestart 
     }
   }
 
-  // Advance to the next question, resetting answer + feedback state.
+  // Save the completed Q/A/feedback into history, then advance to the next question
+  // (or trip isFinished and render the recap).
   function handleNext() {
+    setHistory([...history, { question: currentQuestion, answer, feedback }])
     setCurrentIndex(currentIndex + 1)
     setAnswer('')
     setFeedback(null)
     setError(null)
   }
 
-  // End-of-interview screen.
+  // End of the interview — show the full recap of every Q/A/feedback.
   if (isFinished) {
-    return (
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Interview complete</h2>
-        <p className="text-muted-foreground">
-          You answered all {questions.length} questions. Want another go?
-        </p>
-        <button
-          onClick={onRestart}
-          className="rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:opacity-90"
-        >
-          Start a new interview
-        </button>
-      </div>
-    )
+    return <InterviewRecap history={history} onRestart={onRestart} />
   }
 
   return (
