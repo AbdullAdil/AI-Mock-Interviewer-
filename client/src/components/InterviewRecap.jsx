@@ -1,3 +1,5 @@
+import TypeBadge from './TypeBadge'
+
 // End-of-interview recap. Replaces the previous bare "complete" screen
 // with a full scrollable summary of every question, the user's answer,
 // and the feedback they got. Designed to feel like a deliverable the user
@@ -41,13 +43,11 @@ function RecapEntry({ index, entry }) {
 
   return (
     <li className="space-y-3">
-      <div className="flex items-baseline gap-3">
+      <div className="flex items-center gap-3">
         <span className="text-sm font-semibold text-muted-foreground">
           Question {index + 1}
         </span>
-        <span className="text-xs uppercase tracking-wide text-muted-foreground">
-          {question.type}
-        </span>
+        <TypeBadge type={question.type} />
       </div>
 
       {/* The question itself */}
